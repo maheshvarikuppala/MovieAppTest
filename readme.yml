@@ -1,0 +1,28 @@
+name: Update README
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Update README
+        run: |
+          # Run your script to update README.md with desired colors
+          # For example, you could use sed or a custom script to modify the file
+          sed -i 's/<span style="color: #FF0000;">/NEW_COLOR/' README.md
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "Update README with new colors" || true
+          git push
